@@ -1,12 +1,17 @@
 import { marked } from "marked";
-import { useSignal } from "@preact/signals";
+import { effect, useSignal } from "@preact/signals";
 import { apply, css } from "twind/css";
-import { useState } from "preact/hooks";
+import { useContext, useState } from "preact/hooks";
+import { EditorContext } from "../context/EditorContext.tsx";
 
 export default function Counter() {
-  const mensaje = useSignal<string[]>(["Hola", "Mundo"]);
-  const [isEditing, setIsEditing] = useState<boolean[]>([true, false]);
-  const numberOfRows = useSignal<number[]>([1, 1]);
+  const editorContext = useContext(EditorContext);
+
+  const mensaje = useSignal<string[]>(["# Hola mundo"]);
+  const [isEditing, setIsEditing] = useState<boolean[]>(
+    [true],
+  );
+  const numberOfRows = useSignal<number[]>([1]);
   const prose = css(
     apply`text-lg`,
     {
@@ -18,36 +23,36 @@ export default function Counter() {
 
   const handleKeyPress = (e: KeyboardEvent, i: number) => {
     if (e.key === "Enter") {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        const target = e.target as HTMLTextAreaElement;
-        mensaje.value[i] = target.value;
-        setIsEditing((prev) =>
-          prev.map((value, index) => index === i ? true : value)
-        );
-        if (i === mensaje.value.length - 1) {
-          numberOfRows.value = [
-            ...numberOfRows.value,
-            1,
-          ];
-        }
+      e.preventDefault();
+      const target = e.target as HTMLTextAreaElement;
+      mensaje.value[i] = target.value;
+      setIsEditing((prev) =>
+        prev.map((value, index) => index === i ? true : value)
+      );
+      if (i === mensaje.value.length - 1) {
+        numberOfRows.value[i] = 1;
+        isEditing[i] = false;
       }
+      console.log({
+        mensaje: mensaje.value[i],
+        isEditing: isEditing[i],
+        numberOfRows: numberOfRows.value[i],
+      });
     }
   };
 
   const handleBlur = (e: FocusEvent, i: number) => {
     const target = e.target as HTMLTextAreaElement;
     mensaje.value[i] = target.value;
+
     setIsEditing((prev) =>
       prev.map((value, index) => index === i ? true : value)
     );
     if (i === mensaje.value.length - 1) {
-      if (mensaje.value[i] !== "") {
-        numberOfRows.value = [
-          ...numberOfRows.value,
-          1,
-        ];
-      }
+      numberOfRows.value = [
+        ...numberOfRows.value,
+        1,
+      ];
     }
   };
 
@@ -77,8 +82,12 @@ export default function Counter() {
             return (
               <div>
                 <textarea
+                  class="w-full bg-transparent text-white"
                   cols={30}
                   rows={1}
+                  onClick={() => {
+                    console.log(i);
+                  }}
                   value={mensaje.value[i]}
                   onKeyPress={(e) => {
                     handleKeyPress(e, i);
@@ -96,39 +105,3 @@ export default function Counter() {
     </>
   );
 }
-
-// {isEditing.value
-//   ? (
-//     <div
-//       onClick={() => {
-//         isEditing.value = false;
-//       }}
-//     >
-//       <div
-//         // deno-lint-ignore no-explicit-any
-//         class={prose as any}
-//         dangerouslySetInnerHTML={{
-//           __html: marked(`${mensaje}`),
-//         }}
-//       />
-//     </div>
-//   )
-//   : (
-//     <div>
-//       <textarea
-//         cols={30}
-//         rows={10}
-//         onKeyPress={(e) => {
-//           if (e.key === "Enter") {
-//             const target = e.target as HTMLTextAreaElement;
-//             mensaje.value = target.value;
-//             isEditing.value = true;
-//             console.log({
-//               isEditing: isEditing.value,
-//             });
-//           }
-//         }}
-//       >
-//       </textarea>
-//     </div>
-//   )}
