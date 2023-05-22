@@ -26,12 +26,19 @@ export default function Counter() {
       e.preventDefault();
       const target = e.target as HTMLTextAreaElement;
       mensaje.value[i] = target.value;
-      setIsEditing((prev) =>
-        prev.map((value, index) => index === i ? true : value)
-      );
+      if (isEditing[i] == undefined) {
+        setIsEditing((prev) => {
+          return [...prev, true];
+        });
+      }
+
       if (i === mensaje.value.length - 1) {
         numberOfRows.value[i] = 1;
-        isEditing[i] = false;
+        numberOfRows.value[i + 1] = 1;
+        mensaje.value[i + 1] = "";
+        setIsEditing((prev) =>
+          prev.map((value, index) => index === i + 1 ? false : value)
+        );
       }
       console.log({
         mensaje: mensaje.value[i],
