@@ -1,16 +1,22 @@
 'use client';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { useTextMD } from '../store/useTextMD';
 import CloseEye from './SVG/CloseEye';
 import Eye from './SVG/Eye';
+import { Button } from './ui/button';
 
 function ToggleEditor() {
 	const { isEditing, setIsEditing } = useTextMD();
-	const handleClick = () => setIsEditing(!isEditing);
+	const { setLocalStorage } = useLocalStorage();
+	const handleClick = () => {
+		setIsEditing(!isEditing);
+		setLocalStorage(JSON.stringify(!isEditing), 'isEditing');
+	};
 
 	return (
-		<button onClick={handleClick}>
+		<Button onClick={handleClick}>
 			{isEditing ? <Eye /> : <CloseEye />}
-		</button>
+		</Button>
 	);
 }
 

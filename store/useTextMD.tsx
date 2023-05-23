@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const useTextMD = create<Props>((set, get) => ({
-	text: '',
+	text: '# Hi 👋',
 	isEditing: false,
 	setText: (text: string) => set({ text }),
 	setIsEditing: (isEditing: boolean) => set({ isEditing })

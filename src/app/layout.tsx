@@ -14,16 +14,16 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="bg-[#383838]">
 			<body className={inter.className}>
-				<div className="grid grid-cols-12 min-h-screen min-w-screen text-white">
-					<section className=" bg-[#383838] p-12 col-span-12 sm:col-span-12 md:col-span-9">
+				<main className="grid grid-cols-12 min-h-screen w-screen text-white">
+					<section className="bg-[#383838] p-12 col-span-12 sm:col-span-12 md:col-span-9">
 						{children}
 					</section>
-					<aside className=" bg-[#1E1E1E] p-12 hidden sm:hidden md:col-span-3 md:block">
+					<section className="bg-[#1E1E1E] p-12 hidden sm:hidden sm:col-span-3 md:block md:col-span-3">
 						<p>login</p>
-					</aside>
-				</div>
+					</section>
+				</main>
 			</body>
 		</html>
 	);

@@ -1,15 +1,17 @@
 import { useState } from 'react';
 
+type Items = 'text' | 'isEditing';
+
 export default function useLocalStorage() {
 	const [value, setvalue] = useState('');
 
-	const setLocalStorage = (value: string) => {
-		localStorage.setItem('text', value);
+	const setLocalStorage = (value: string, item: Items) => {
+		localStorage.setItem(item, value);
 		setvalue(value);
 	};
 
-	const getLocalStorage = () => {
-		const text = localStorage.getItem('text');
+	const getLocalStorage = (item: Items) => {
+		const text = localStorage.getItem(item);
 		setvalue(text || '');
 	};
 

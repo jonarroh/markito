@@ -8,11 +8,13 @@ import { useTextMD } from '../../store/useTextMD';
 export default function Home() {
 	const { isEditing } = useTextMD();
 	return (
-		<main>
+		<div>
 			<div className="flex flex-col  justify-around">
-				<ToggleEditor />
-				{isEditing ? <Md /> : <Editor />}
+				<div className="flex justify-end">
+					<ToggleEditor />
+				</div>
+				{isEditing ? <Editor /> : <Md />}
 			</div>
-		</main>
+		</div>
 	);
 }
