@@ -3,11 +3,15 @@
 import Markdown from 'marked-react';
 import { useTextMD } from '../store/useTextMD';
 
-export default function Md() {
+interface Props {
+	textFromDB?: string;
+}
+
+export default function Md({ textFromDB }: Props) {
 	const { text } = useTextMD();
 	return (
 		<div className="bg-[#383838]  resize-none outline-none text-white">
-			<Markdown>{text}</Markdown>
+			<Markdown value={textFromDB ? textFromDB : text}></Markdown>
 		</div>
 	);
 }

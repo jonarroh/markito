@@ -83,3 +83,38 @@
 h1 {
 	@apply text-4xl font-bold text-primary-foreground;
 }
+h2 {
+	@apply text-3xl font-bold text-primary-foreground;
+}
+h3 {
+	@apply text-2xl font-bold text-primary-foreground;
+}
+h4 {
+	@apply text-xl font-bold text-primary-foreground;
+}
+h5 {
+	@apply text-lg font-bold text-primary-foreground;
+}
+h6 {
+	@apply text-base font-bold text-primary-foreground;
+}
+
+p {
+	@apply text-base text-primary-foreground;
+}
+
+a {
+	@apply text-blue-700 underline;
+}
+
+ul {
+	@apply list-disc list-inside;
+}
+
+ol {
+	@apply list-decimal list-inside;
+}
+
+pre {
+	@apply bg-gray-100 text-gray-900 rounded-md p-4;
+}

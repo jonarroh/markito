@@ -14,7 +14,7 @@ function ToggleEditor() {
 	};
 
 	return (
-		<Button onClick={handleClick}>
+		<Button onClick={handleClick} variant={'secondary'}>
 			{isEditing ? <Eye /> : <CloseEye />}
 		</Button>
 	);
