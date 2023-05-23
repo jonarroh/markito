@@ -1,11 +1,5 @@
-# fresh project
+# Marky
 
-### Usage
+![Marky](public/Marky.svg)
 
-Start the project:
-
-```
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
+Espacio colaborativo basado en Markdown.
