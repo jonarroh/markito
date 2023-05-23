@@ -15,9 +15,9 @@ Espacio colaborativo basado en Markdown.
 
 - ✅ Add a `useLocalStorage` hook to persist state
 - ✅ parse markdown to html
-- ❎ add a `useDebounce` hook to debounce the markdown parsing
-- ❎ add a `useCopyToClipboard` hook to copy the html to clipboard
-- ❎ add a `useShare` hook to share the html
-- ❎ add a `useMdToDocx` hook to convert markdown to docx
-- ❎ add a `useMdToPdf` hook to convert markdown to pdf
-- ❎ create a room to share the markdown and edit it in real time
+- ❌ add a `useDebounce` hook to debounce the markdown parsing
+- ❌ add a `useCopyToClipboard` hook to copy the html to clipboard
+- ❌ add a `useShare` hook to share the html
+- ❌ add a `useMdToDocx` hook to convert markdown to docx
+- ❌ add a `useMdToPdf` hook to convert markdown to pdf
+- ❌ create a room to share the markdown and edit it in real time
