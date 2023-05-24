@@ -12,14 +12,14 @@ export default async function Room({
 
 	const room = await prisma.room.findFirst({
 		where: {
-			id_room: params.room
+			id_archive: params.room
 		}
 	});
 
 	//buscar el arvhivo de la sala en la base de datos
-	const archivo = await prisma.archivo.findFirst({
+	const archivo = await prisma.archive.findFirst({
 		where: {
-			id_archivo: params.room
+			id_archive: params.room
 		}
 	});
 
@@ -34,7 +34,7 @@ export default async function Room({
 
 	return (
 		<div>
-			<p>{roomArchivo.nombre_archivo}</p>
+			<p>{roomArchivo.name}</p>
 			<Md textFromDB={roomArchivo.text} />
 		</div>
 	);
