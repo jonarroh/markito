@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 
 export function Dialogs() {
 	const nameRef = useRef<HTMLInputElement>(null);
-	const permissionRef = useRef<HTMLInputElement>(null);
+	const permissionRef = useRef<HTMLButtonElement>(null);
 	const { user } = useUser();
 	const userName = user?.username ?? 'Anonymous';
 	const router = useRouter();
