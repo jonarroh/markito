@@ -1,3 +1,4 @@
+//@ts-check
 import { PrismaClient } from '@prisma/client';
 import Md from '../../../components/Md';
 
