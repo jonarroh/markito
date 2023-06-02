@@ -10,15 +10,19 @@ interface Props {
 
 function Editor({ textFromDB }: Props) {
 	const { setText, text } = useTextMD();
-	const { value, getLocalStorage, setLocalStorage } =
-		useLocalStorage();
 	const setDebouncedValue = useDebouncedValue({
 		value: text,
 		delay: 1000
 	});
 
 	useEffect(() => {
-		setLocalStorage(value, 'text');
+		const textFromLocalStorage = localStorage.getItem('text') || '{}';
+
+		setText(textFromLocalStorage);
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem('text', text);
 	}, [setDebouncedValue]);
 
 	useEffect(() => {
@@ -33,7 +37,7 @@ function Editor({ textFromDB }: Props) {
 				className="bg-[#383838] w-full h-screen resize-none outline-none text-white"
 				onChange={e => {
 					setText(e.target.value);
-					setLocalStorage(e.target.value, 'text');
+					localStorage.setItem('text', e.target.value);
 				}}
 				value={text}
 			/>

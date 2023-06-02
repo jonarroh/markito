@@ -1,8 +1,11 @@
 //@ts-check
 import { PrismaClient } from '@prisma/client';
 import Md from '../../../components/Md';
-import Copy from '../../../components/ui/copy';
 const prisma = new PrismaClient();
+import { useUser } from '@clerk/nextjs';
+import EditMode from '../../../components/ui/EditMode';
+import ToggleEditor from '../../../components/ToggleEditor';
+
 export default async function Room({
 	params
 }: {
@@ -28,10 +31,18 @@ export default async function Room({
 			...room,
 			...archivo
 		};
+
 		return (
 			<div>
 				<p>{roomArchivo.name}</p>
-				<Md textFromDB={roomArchivo.text} />
+				{(room?.permission === 'edit' && (
+					<div key={roomArchivo.id}>
+						<div>
+							<ToggleEditor />
+						</div>
+						<EditMode textFromDB={roomArchivo.text} />
+					</div>
+				)) || <Md textFromDB={roomArchivo.text} />}
 			</div>
 		);
 	} catch (error) {

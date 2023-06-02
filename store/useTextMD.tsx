@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const useTextMD = create<Props>((set, get) => ({
-	text: window.localStorage.getItem('text') || '',
+	text: '# Bienvenido',
 	isEditing: false,
 	setText: (text: string) => set({ text }),
 	setIsEditing: (isEditing: boolean) => set({ isEditing })
