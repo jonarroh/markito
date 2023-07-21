@@ -3,8 +3,6 @@ import { SignInButton, useClerk, useUser } from '@clerk/nextjs';
 
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { Button } from './button';
-import { Alert, AlertDescription, AlertTitle } from './alert';
-import { Terminal } from 'lucide-react';
 
 export default function Header() {
 	const { user, isSignedIn } = useUser();

@@ -1,8 +1,6 @@
-//@ts-check
 import { PrismaClient } from '@prisma/client';
 import Md from '../../../components/Md';
 const prisma = new PrismaClient();
-import { useUser } from '@clerk/nextjs';
 import EditMode from '../../../components/ui/EditMode';
 import ToggleEditor from '../../../components/ToggleEditor';
 
