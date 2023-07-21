@@ -1,6 +1,6 @@
 'use client';
 import { useTextMD } from '../store/useTextMD';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import mdToHTML from '../lib/md';
 
 interface Props {
@@ -8,25 +8,23 @@ interface Props {
 }
 
 export default function Md({ textFromDB }: Props) {
-	const { text, setText } = useTextMD();
-	//TODO : delete localStorage and use cookies temporary
+	const [textToRender, setTextToRender] = useState('');
+	useEffect(() => {
+		setTextToRender(localStorage.getItem('text') ?? '');
+	}, []);
+
 	useEffect(() => {
 		if (!textFromDB) return;
-		localStorage.setItem('text', JSON.stringify(textFromDB));
-		setText(textFromDB);
-		return () => {
-			localStorage.removeItem('text');
-		};
+		setTextToRender(textFromDB);
+		window.localStorage.setItem('text', textFromDB);
 	}, [textFromDB]);
-
-	const textFromLocalStorage = localStorage.getItem('text') || '{}';
 
 	return (
 		<div className="bg-[#383838]  resize-none outline-none text-white">
 			<section id="mk">
 				<p
 					dangerouslySetInnerHTML={{
-						__html: mdToHTML(textFromLocalStorage ?? text)
+						__html: mdToHTML(textToRender)
 					}}></p>
 			</section>
 		</div>

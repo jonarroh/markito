@@ -16,14 +16,17 @@ function Editor({ textFromDB }: Props) {
 	});
 
 	useEffect(() => {
-		const textFromLocalStorage = localStorage.getItem('text') || '{}';
-
+		const textFromLocalStorage = localStorage.getItem('text');
+		if (!textFromLocalStorage) {
+			alert('No text found in local storage');
+			return;
+		}
 		setText(textFromLocalStorage);
 	}, []);
 
-	useEffect(() => {
-		localStorage.setItem('text', text);
-	}, [setDebouncedValue]);
+	// useEffect(() => {
+	// 	localStorage.setItem('text', text);
+	// }, [setDebouncedValue]);
 
 	useEffect(() => {
 		if (!textFromDB) return;

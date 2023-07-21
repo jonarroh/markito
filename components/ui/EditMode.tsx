@@ -1,5 +1,4 @@
 'use client';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import { useTextMD } from '../../store/useTextMD';
 import Editor from '../Editor';
 import Md from '../Md';
@@ -11,7 +10,7 @@ function EditMode({ textFromDB }: Props) {
 	const { isEditing } = useTextMD();
 	if (textFromDB) {
 		console.log(textFromDB);
-		window.localStorage.setItem('text', textFromDB);
+		window.localStorage.setItem('textMD', textFromDB);
 	}
 
 	return (
